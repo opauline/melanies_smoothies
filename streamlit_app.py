@@ -21,7 +21,7 @@ st.write ('Name on the Smoothie will be: ', name_on_order)
 #    ("Email", "Home phone", "Mobile phone"),
 #)
 #st.write("You selected:", option)
-cnx = st.connection("Snowflake")
+cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 
