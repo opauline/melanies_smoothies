@@ -27,7 +27,8 @@ st.write("Choose the fruits you want in your custom Smoothie!")
 name_on_order = st.text_input("Name on Smoothie:")
 st.write('Name on the Smoothie will be: ', name_on_order)
 
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+#my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME')).to_pandas()['FRUIT_NAME'].tolist()
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:',
