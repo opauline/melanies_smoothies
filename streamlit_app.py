@@ -2,6 +2,9 @@
 import streamlit as st
 from snowflake.snowpark.functions import col
 from cryptography.hazmat.primitives import serialization
+import requests  
+smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
+st.text(smoothiefroot_response)
 
 st.set_page_config(page_title="Custom Smoothie Order Form")
 
