@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import serialization
 import requests  
 st.set_page_config(page_title="Custom Smoothie Order Form")
 # smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+#smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 #st.text(smoothiefroot_response)
 
 # Decode the private key from secrets
@@ -46,7 +46,8 @@ if ingredients_list:
     ingredients_string = ''
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
-
+        st.subheader(fruit_chosen + ' Nutrition Information')
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients,NAME_ON_ORDER)
                     values ('""" + ingredients_string + """','""" + name_on_order + """' )"""
 
