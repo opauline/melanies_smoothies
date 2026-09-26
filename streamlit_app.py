@@ -2,6 +2,23 @@
 import streamlit as st
 import os
 from snowflake.snowpark.functions import col
+import streamlit as st
+from cryptography.hazmat.primitives import serialization
+
+# Decode the private key from secrets
+pem = st.secrets["connections"]["snowflake"]["private_key_content"]["p8_key"].encode()
+pwd = st.secrets["connections"]["snowflake"]["private_key_file_pwd"].encode()
+
+pk = serialization.load_pem_private_key(pem, password=pwd)
+pk_bytes = pk.private_bytes(
+    serialization.Encoding.DER,
+    serialization.PrivateFormat.PKCS8,
+    serialization.NoEncryption()
+)
+
+# Connect using key-pair auth
+conn = st.connection("snowflake", private_key=pk_bytes)
+session = conn.session()
 
 st.set_page_config(page_title="Custom Smoothie Order Form")
 
