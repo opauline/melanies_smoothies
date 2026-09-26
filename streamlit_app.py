@@ -7,7 +7,6 @@ st.set_page_config(page_title="Custom Smoothie Order Form")
 # smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 #st.text(smoothiefroot_response)
-st.text(smoothiefroot_response.json())
 
 # Decode the private key from secrets
 pem = st.secrets["connections"]["snowflake"]["private_key_content"]["p8_key"].encode()
@@ -39,7 +38,8 @@ ingredients_list = st.multiselect(
     my_dataframe,
     max_selections=5
 )
-
+st.text(smoothiefroot_response)
+st.text(smoothiefroot_response.json())
 if ingredients_list:
     ingredients_string = ''
     for fruit_chosen in ingredients_list:
